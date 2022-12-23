@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 1750781015}
   - component: {fileID: 1750781016}
   m_Layer: 0
-  m_Name: sprite-character-player_1
+  m_Name: WeaponHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +542,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 245443054, guid: 4e6bb91d6e4aabe45bd0c5557768c9d0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -550,7 +550,7 @@ SpriteRenderer:
   m_Size: {x: 1.46, y: 6.0126014}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1805579227
@@ -564,6 +564,7 @@ GameObject:
   - component: {fileID: 1805579228}
   - component: {fileID: 1805579233}
   - component: {fileID: 1805579232}
+  - component: {fileID: 1805579235}
   - component: {fileID: 1805579234}
   - component: {fileID: 1805579231}
   - component: {fileID: 1805579230}
@@ -678,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInputs: {fileID: 1805579232}
+  _playerShoot: {fileID: 1805579235}
   _playerAimWeapon: {fileID: 1805579234}
   _playerMoviment: {fileID: 1805579231}
 --- !u!114 &1805579234
@@ -695,6 +697,24 @@ MonoBehaviour:
   behaviour: {fileID: 1805579233}
   aimPivot: {fileID: 197541877}
   graphicToFlip: {fileID: 1654213779}
+--- !u!114 &1805579235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805579227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13f0fb65bd79254cab5aa1cbb62a08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviour: {fileID: 1805579233}
+  defaultWeapon: {fileID: 11400000, guid: 832dfaee55122ef4191e81a2d7167360, type: 2}
+  teste: {fileID: 11400000, guid: 8a090d566b7526640820bc88247938e9, type: 2}
+  weaponHandler: {fileID: 1750781016}
+  currentAmmo: 0
+  isInfinityAmmo: 0
 --- !u!1 &1854992460
 GameObject:
   m_ObjectHideFlags: 0

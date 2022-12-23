@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "e8fa3f85-6a32-427d-ab50-fadbe179c1ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "5df08398-a1ae-4096-8337-b5f308c962c6",
@@ -130,6 +139,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "MousePosistion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46332ffe-2dee-4d99-9f24-af4770f3e851",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

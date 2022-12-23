@@ -39,6 +39,15 @@ namespace Core.Inputs
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8fa3f85-6a32-427d-ab50-fadbe179c1ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""5df08398-a1ae-4096-8337-b5f308c962c6"",
@@ -156,6 +165,17 @@ namespace Core.Inputs
                     ""action"": ""MousePosistion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46332ffe-2dee-4d99-9f24-af4770f3e851"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,6 +202,7 @@ namespace Core.Inputs
             // Gameplay
             m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
             m_Gameplay_Horizontal = m_Gameplay.FindAction("Horizontal", throwIfNotFound: true);
+            m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
             m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
             m_Gameplay_MousePosistion = m_Gameplay.FindAction("MousePosistion", throwIfNotFound: true);
         }
@@ -244,6 +265,7 @@ namespace Core.Inputs
         private readonly InputActionMap m_Gameplay;
         private IGameplayActions m_GameplayActionsCallbackInterface;
         private readonly InputAction m_Gameplay_Horizontal;
+        private readonly InputAction m_Gameplay_Shoot;
         private readonly InputAction m_Gameplay_Jump;
         private readonly InputAction m_Gameplay_MousePosistion;
         public struct GameplayActions
@@ -251,6 +273,7 @@ namespace Core.Inputs
             private @GameplayInputActions m_Wrapper;
             public GameplayActions(@GameplayInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Horizontal => m_Wrapper.m_Gameplay_Horizontal;
+            public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
             public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
             public InputAction @MousePosistion => m_Wrapper.m_Gameplay_MousePosistion;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
@@ -265,6 +288,9 @@ namespace Core.Inputs
                     @Horizontal.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHorizontal;
                     @Horizontal.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHorizontal;
                     @Horizontal.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHorizontal;
+                    @Shoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                    @Shoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                    @Shoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                     @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
@@ -278,6 +304,9 @@ namespace Core.Inputs
                     @Horizontal.started += instance.OnHorizontal;
                     @Horizontal.performed += instance.OnHorizontal;
                     @Horizontal.canceled += instance.OnHorizontal;
+                    @Shoot.started += instance.OnShoot;
+                    @Shoot.performed += instance.OnShoot;
+                    @Shoot.canceled += instance.OnShoot;
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
@@ -300,6 +329,7 @@ namespace Core.Inputs
         public interface IGameplayActions
         {
             void OnHorizontal(InputAction.CallbackContext context);
+            void OnShoot(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnMousePosistion(InputAction.CallbackContext context);
         }

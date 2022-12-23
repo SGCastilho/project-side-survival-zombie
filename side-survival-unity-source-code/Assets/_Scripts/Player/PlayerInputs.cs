@@ -8,6 +8,7 @@ namespace Core.Player
     {
         private GameplayInputActions _inputActions;
 
+        private Action ShootAction;
         private Action JumpAction;
 
         public float HorizontalAxis { get => _horizontalAxis; }
@@ -40,6 +41,7 @@ namespace Core.Player
 
         private void DisableInputs()
         {
+            UnsubscribeShootAction();
             UnsubscribeJumpAction();
 
             _inputActions.Disable();
@@ -51,6 +53,20 @@ namespace Core.Player
         {
             _horizontalAxis = _inputActions.Gameplay.Horizontal.ReadValue<float>();
             _mouseWorldPosistion = _inputActions.Gameplay.MousePosistion.ReadValue<Vector2>();
+        }
+
+        public void SubscribeShootAction(Action actionToPerform)
+        {
+            ShootAction += actionToPerform;
+
+            _inputActions.Gameplay.Shoot.started += ctx => ShootAction();
+        }
+
+        public void UnsubscribeShootAction()
+        {
+            _inputActions.Gameplay.Shoot.started -= ctx => ShootAction();
+
+            ShootAction = null;
         }
 
         public void SubscribeJumpAction(Action actionToPerform)
